@@ -1,4 +1,5 @@
 // import ProductDesc from "./ProductDesc";
+import "./Product.css";
 
 const Product = (props) => {
   // const price = "99$";
@@ -7,13 +8,15 @@ const Product = (props) => {
     <div id="product" className="product">
       <p>Product Name : {props.title}</p>
 
-      <p>Product Price : {props.price}$</p>
+      <p onClick={props.click}>Product Price : {props.price}$</p>
 
       {/* <p>Product Price: {price}</p> */}
 
       <p>{props.children}</p>
 
       {/* <ProductDesc description="This Book Is very good for young and old peoples" /> */}
+
+      <input type="text" onChange={props.change} />
     </div>
   );
 };
