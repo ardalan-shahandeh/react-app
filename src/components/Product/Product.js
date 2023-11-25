@@ -6,7 +6,7 @@ const Product = (props) => {
 
   return (
     <div id="product" className="product">
-      <p>Product Name : {props.title}</p>
+      <p onClick={props.click}>Product Name : {props.title}</p>
 
       <p onClick={props.click}>Product Price : {props.price}$</p>
 
@@ -16,7 +16,7 @@ const Product = (props) => {
 
       {/* <ProductDesc description="This Book Is very good for young and old peoples" /> */}
 
-      <input type="text" onChange={props.change} />
+      <input type="text" onChange={props.change} value={props.title} />
     </div>
   );
 };
