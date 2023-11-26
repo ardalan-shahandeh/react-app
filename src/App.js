@@ -30,7 +30,9 @@
 // ===============With Class+++++++++++++
 
 import React from "react";
-import Product from "./components/Product/Product";
+import ProductList from "./components/ProductList/ProductList";
+import Main from "./components/Main/Main";
+
 import "./App.css";
 class App extends React.Component {
   state = {
@@ -70,7 +72,7 @@ class App extends React.Component {
       return item.id === id;
     });
 
-    const product = this.state.products[productIndex];
+    const product = { ...this.state.products[productIndex] };
 
     product.title = event.target.value;
 
@@ -111,17 +113,11 @@ class App extends React.Component {
     if (this.state.showProducts) {
       products = (
         <div>
-          {this.state.products.map((item, index) => {
-            return (
-              <Product
-                click={() => this.deleteProductHandler(index)}
-                title={item.title}
-                price={item.price}
-                key={item.id}
-                change={(event) => this.changeTitleHandler(event, item.id)}
-              />
-            );
-          })}
+          <ProductList
+            products={this.state.products}
+            click={this.deleteProductHandler}
+            change={this.changeTitleHandler}
+          />
         </div>
       );
 
@@ -163,9 +159,7 @@ class App extends React.Component {
       <div id="main" className="center">
         <h1>Book Store</h1>
 
-        <button onClick={this.toggleProductHandler} style={btn}>
-          Show/Hide Product
-        </button>
+        <Main click={this.toggleProductHandler} />
 
         {products}
 
