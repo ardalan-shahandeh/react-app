@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Main = (props) => {
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     alert("Ostad Bagheri");
+  //   }, 2000);
+  // }, [props.products]);
+
   const btn = {
     backgroundColor: "#7b1fa2",
     color: "#ffffff",
@@ -18,7 +24,6 @@ const Main = (props) => {
       <button onClick={props.click} style={btn}>
         Show/Hide Product
       </button>
-      ;
     </div>
   );
 };
