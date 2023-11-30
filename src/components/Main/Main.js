@@ -1,11 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useContext } from "react";
+import AuthContext from "../../context/auth-context";
 
 const Main = (props) => {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     alert("Ostad Bagheri");
-  //   }, 2000);
-  // }, [props.products]);
+  const btnRef = useRef(null);
+
+  const authContext = useContext(AuthContext);
+
+  useEffect(() => {
+    btnRef.current.click();
+    return () => {
+      console.log("Main.js cleanUp");
+    };
+  }, []);
 
   const btn = {
     backgroundColor: "#7b1fa2",
@@ -21,9 +27,11 @@ const Main = (props) => {
   return (
     <div>
       <h1>Book Store</h1>
-      <button onClick={props.click} style={btn}>
+      <button ref={btnRef} onClick={props.click} style={btn}>
         Show/Hide Product
       </button>
+
+      <button onClick={authContext.login}>Login</button>
     </div>
   );
 };

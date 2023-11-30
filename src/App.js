@@ -1,6 +1,11 @@
 import React from "react";
-import Main from "./components/Main/Main";
+
 import ProductList from "./components/ProductList/ProductList";
+import Main from "./components/Main/Main";
+import Wrapper from "./hoc/Wrapper";
+import Container from "./hoc/Container";
+import AuthContext from "./context/auth-context";
+
 import "./App.css";
 
 class App extends React.Component {
@@ -12,6 +17,7 @@ class App extends React.Component {
       { id: 4, title: "Book 4", price: "400" },
     ],
     showProducts: false,
+    auth: false,
   };
 
   changePriceHandler = (newTitle) => {
@@ -54,18 +60,11 @@ class App extends React.Component {
     this.setState({ products: products });
   };
 
-  render() {
-    const btn = {
-      backgroundColor: "#7b1fa2",
-      color: "#ffffff",
-      font: "inherit",
-      border: "none",
-      outline: "none",
-      borderRadius: "3px",
-      padding: "0.6rem",
-      margin: "0.6rem auto",
-    };
+  loginHandler = () => {
+    this.setState({ auth: true });
+  };
 
+  render() {
     let products = null;
 
     if (this.state.showProducts) {
@@ -75,22 +74,29 @@ class App extends React.Component {
             products={this.state.products}
             click={this.deleteProductHandler}
             change={this.changeTitleHandler}
+            isAuth={this.state.auth}
           />
         </div>
       );
     }
 
     return (
-      <div id="main" className="center">
-        <Main
-          // products={this.state.products}
-          click={this.toggleProductHandler}
-        />
+      <div className="center">
+        <AuthContext.Provider
+          value={{ auth: this.state.auth, login: this.loginHandler }}
+        >
+          <Main
+            // products={this.state.products}
+            click={this.toggleProductHandler}
+            login={this.loginHandler}
+          />
 
-        {products}
+          {products}
+        </AuthContext.Provider>
       </div>
     );
   }
 }
 
 export default App;
+// export default Wrapper(App, 'center');
